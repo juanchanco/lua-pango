@@ -21,6 +21,8 @@ set(WITH_LUAVER "53"
 
 set(
 	SOURCES
+	src/font_desc.c
+	src/layout.c
 	src/pango.c
 )
 
@@ -32,6 +34,7 @@ configure_file(
 include_directories(${CMAKE_SOURCE_DIR}/build)
 
 find_package(Pango REQUIRED)
+find_package(GLIB REQUIRED)
 
 if (WITH_LUAVER MATCHES "53")
 	find_package(Lua53 REQUIRED)
@@ -64,6 +67,7 @@ else ()
 endif ()
 
 include_directories(
+	${GLIB_INCLUDE_DIRS}
 	${PANGO_INCLUDE_DIRS}
 	${CMAKE_SOURCE_DIR}
 	${LUA_INCLUDES}
@@ -94,6 +98,7 @@ set_target_properties(
 target_link_libraries(
 	Pango
         common
+	${GLIB_LIBRARIES}
 	${PANGO_LIBRARIES}
 	${LUA_LIBRARIES}
 )
