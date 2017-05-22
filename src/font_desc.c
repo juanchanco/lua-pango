@@ -66,7 +66,11 @@ const CommonEnum LuaPangoFontMask[] = {
 /*PangoFontDescription * 	pango_font_description_copy_static ()*/
 /*guint 	pango_font_description_hash ()*/
 /*gboolean 	pango_font_description_equal ()*/
-void _pango_font_description_free () {}
+static int _pango_font_description_free (lua_State* L) {
+    PangoFontDescription *desc = commonGetAs(L, 1, "FontDescription", PangoFontDescription *);
+    pango_font_description_free(desc);
+    return commonPush(L, "b", 1);
+}
 /*void 	pango_font_descriptions_free ()*/
 /*void 	pango_font_description_set_family ()*/
 /*void 	pango_font_description_set_family_static ()*/
@@ -79,9 +83,14 @@ void _pango_font_description_free () {}
 /*PangoWeight 	pango_font_description_get_weight ()*/
 /*void 	pango_font_description_set_stretch ()*/
 /*PangoStretch 	pango_font_description_get_stretch ()*/
-/*void 	pango_font_description_set_size ()*/
+/*void 	_pango_font_description_set_absolute_size ()*/
 /*gint 	pango_font_description_get_size ()*/
-void _pango_font_description_set_absolute_size () {}
+static int _pango_font_description_set_size (lua_State* L) {
+    PangoFontDescription *desc = commonGetAs(L, 1, "FontDescription", PangoFontDescription *);
+    int size = luaL_checkinteger(L, 1);
+    pango_font_description_set_size(desc, size);
+    return commonPush(L, "b", 1);
+}
 /*gboolean 	pango_font_description_get_size_is_absolute ()*/
 /*void 	pango_font_description_set_gravity ()*/
 /*PangoGravity 	pango_font_description_get_gravity ()*/
@@ -90,7 +99,11 @@ void _pango_font_description_set_absolute_size () {}
 /*void 	pango_font_description_merge ()*/
 /*void 	pango_font_description_merge_static ()*/
 /*gboolean 	pango_font_description_better_match ()*/
-PangoFontDescription * _pango_font_description_from_string () {}
+static int _pango_font_description_from_string (lua_State* L) {
+    const char* str = luaL_checkstring (L, 1);
+    PangoFontDescription* result = pango_font_description_from_string(str);
+    return commonPush(L, "p", "FontDescription", result);
+}
 /*char * 	pango_font_description_to_string ()*/
 /*char * 	pango_font_description_to_filename ()*/
 /*PangoFontMetrics * 	pango_font_metrics_ref ()*/

@@ -35,14 +35,26 @@ const CommonEnum LuaPangoAlignment[] = {
 /*PangoContext * 	pango_layout_get_context ()*/
 /*void 	pango_layout_context_changed ()*/
 /*guint 	pango_layout_get_serial ()*/
-void 	_pango_layout_set_text () {}
+static int _pango_layout_set_text (lua_State* L) {
+    PangoLayout *layout = commonGetAs(L, 1, "Layout", PangoLayout *);
+    const char* text = luaL_checkstring(L, 2);
+    int length = luaL_checkinteger(L, 3);
+    pango_layout_set_text(layout, text, length);
+    return commonPush(L, "b", 1);
+}
 /*const char * 	pango_layout_get_text ()*/
 /*gint 	pango_layout_get_character_count ()*/
 /*void 	pango_layout_set_markup ()*/
 /*void 	pango_layout_set_markup_with_accel ()*/
 /*void 	pango_layout_set_attributes ()*/
 /*PangoAttrList * 	pango_layout_get_attributes ()*/
-void 	_pango_layout_set_font_description () {}
+static int _pango_layout_set_font_description (lua_State* L) {
+    PangoLayout *layout = commonGetAs(L, 1, "Layout", PangoLayout *);
+    PangoFontDescription *desc =
+        commonGetAs(L, 2, "FontDescription", PangoFontDescription *);
+    pango_layout_set_font_description(layout, desc);
+    return commonPush(L, "b", 1);
+}
 /*const PangoFontDescription * 	pango_layout_get_font_description ()*/
 /*void 	pango_layout_set_width ()*/
 /*int 	pango_layout_get_width ()*/
@@ -78,7 +90,13 @@ void 	_pango_layout_set_font_description () {}
 /*void 	pango_layout_move_cursor_visually ()*/
 /*void 	pango_layout_get_extents ()*/
 /*void 	pango_layout_get_pixel_extents ()*/
-void 	_pango_layout_get_size () {}
+static int _pango_layout_get_size (lua_State* L) {
+    PangoLayout *layout = commonGetAs(L, 1, "Layout", PangoLayout *);
+    int *width = (int *) 0 ;
+    int *height = (int *) 0 ;
+    pango_layout_get_size(layout, width, height);
+    return commonPush(L, "ii", width, height);
+}
 /*void 	pango_layout_get_pixel_size ()*/
 /*int 	pango_layout_get_baseline ()*/
 /*int 	pango_layout_get_line_count ()*/
