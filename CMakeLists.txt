@@ -97,7 +97,7 @@ set_target_properties(
 
 target_link_libraries(
 	Pango
-        common
+	common
 	${GLIB_LIBRARIES}
 	${PANGO_LIBRARIES}
 	${LUA_LIBRARIES}
@@ -108,6 +108,7 @@ install(
 	DESTINATION ${LUA_LIBDIR}
 )
 
+add_subdirectory(pangocairo)
 
 # For the examples and tutorials
 #add_subdirectory(examples)
