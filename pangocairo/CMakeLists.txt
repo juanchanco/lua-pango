@@ -14,19 +14,19 @@ include_directories(
 )
 
 add_library(
-	Pangocairo
+	PangoCairo
 	MODULE
 	${PANGOCAIRO_SOURCES}
 )
 
 set_target_properties(
-	Pangocairo
+	PangoCairo
 	PROPERTIES
 	PREFIX ""
 )
 
 target_link_libraries(
-	Pangocairo
+	PangoCairo
 	common
 	${CAIRO_LIBRARIES}
 	${GLIB_LIBRARIES}
@@ -34,6 +34,6 @@ target_link_libraries(
 )
 
 install(
-	TARGETS Pangocairo
-	DESTINATION ${LUA_LIBDIR}/pango
+	TARGETS PangoCairo
+	DESTINATION ${LUA_LIBDIR}
 )
