@@ -146,7 +146,7 @@ static int l_layout_gc(lua_State *L) {
 }
 
 /*TODO: conditonal include*/
-#include "pangocairo/src/pangocairo.c"
+#include "pangocairo.c"
 
 const luaL_Reg LayoutMethods[] = {
 	{ "setText", _pango_layout_set_text },

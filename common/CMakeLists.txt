@@ -3,6 +3,7 @@ project(common)
 set(
 	SOURCES
 	common.c
+	pango_common.c
 	array.c
 	table.c
 )
