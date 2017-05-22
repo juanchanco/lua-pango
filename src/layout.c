@@ -38,7 +38,7 @@ const CommonEnum LuaPangoAlignment[] = {
 /*void  pango_layout_context_changed ()*/
 /*guint  pango_layout_get_serial ()*/
 static int _pango_layout_set_text (lua_State* L) {
-    PangoLayout *layout = commonGetAs(L, 1, Layout.name, PangoLayout *);
+    PangoLayout *layout = commonGetAs(L, 1, LayoutName, PangoLayout *);
     const char* text = luaL_checkstring(L, 2);
     int length = luaL_checkinteger(L, 3);
     pango_layout_set_text(layout, text, length);
@@ -51,7 +51,7 @@ static int _pango_layout_set_text (lua_State* L) {
 /*void  pango_layout_set_attributes ()*/
 /*PangoAttrList *  pango_layout_get_attributes ()*/
 static int _pango_layout_set_font_description (lua_State* L) {
-    PangoLayout *layout = commonGetAs(L, 1, Layout.name, PangoLayout *);
+    PangoLayout *layout = commonGetAs(L, 1, LayoutName, PangoLayout *);
     PangoFontDescription *desc =
         commonGetAs(L, 2, "FontDescription", PangoFontDescription *);
     pango_layout_set_font_description(layout, desc);
@@ -93,7 +93,7 @@ static int _pango_layout_set_font_description (lua_State* L) {
 /*void  pango_layout_get_extents ()*/
 /*void  pango_layout_get_pixel_extents ()*/
 static int _pango_layout_get_size (lua_State* L) {
-    PangoLayout *layout = commonGetAs(L, 1, Layout.name, PangoLayout *);
+    PangoLayout *layout = commonGetAs(L, 1, LayoutName, PangoLayout *);
     int *width = (int *) 0;
     int *height = (int *) 0;
     pango_layout_get_size(layout, width, height);
@@ -135,41 +135,39 @@ static int _pango_layout_get_size (lua_State* L) {
 /*gboolean  pango_layout_line_x_to_index ()*/
 /*void  pango_layout_line_get_x_ranges ()*/
 
-static int l_texture_gc(lua_State *L) {
-CommonUserdata *udata = commonGetUserdata(L, 1, LayoutName);
+static int l_layout_gc(lua_State *L) {
+	CommonUserdata *udata = commonGetUserdata(L, 1, LayoutName);
 
-if (udata->mustdelete)
+	/*if (udata->mustdelete)*/
 	/*TODO: count down to zero?*/
 	g_object_unref(udata->data);
 
-return 0;
-
-/*PangoLayout *Layout = commonGetUserdata(L, 1, LayoutName);*/
-/*g_object_unref(layout);*/
-return 0;
+	return 0;
 }
 
-
-/* --------------------------------------------------------
- * Layout object definition
- * -------------------------------------------------------- */
+/*TODO: conditonal include*/
+#include "pangocairo/src/pangocairo.c"
 
 const luaL_Reg LayoutMethods[] = {
-{ "setText", _pango_layout_set_text },
-{ "setFontDescription", _pango_layout_set_font_description },
-{ "getSize", _pango_layout_get_size },
-{ NULL, NULL }
+	{ "setText", _pango_layout_set_text },
+	{ "setFontDescription", _pango_layout_set_font_description },
+	{ "getSize", _pango_layout_get_size },
+	/*pangocairo.c TODO: conditonal include*/
+	{ "createFromCairo", _pango_cairo_create_layout },
+	{ "updateCairo", _pango_cairo_update_layout },
+	{ "showCairo", _pango_cairo_show_layout },
+	{ NULL, NULL }
 };
 
 const luaL_Reg LayoutMetamethods[] = {
- /*{ "__eq", l_texture_eq },*/
- { "__gc", l_texture_gc },
- /*{ "__tostring", l_texture_tostring },*/
- { NULL, NULL }
+	/*{ "__eq", l_texture_eq },*/
+	{ "__gc", l_layout_gc },
+	/*{ "__tostring", l_texture_tostring },*/
+	{ NULL, NULL }
 };
 
 const CommonObject Layout = {
-"Layout",
-LayoutMethods,
-LayoutMetamethods
+	"PangoLayout",
+	LayoutMethods,
+	LayoutMetamethods
 };

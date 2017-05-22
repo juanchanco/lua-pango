@@ -9,4 +9,9 @@ extern const luaL_Reg LayoutFunctions[];
 
 extern const CommonObject Layout;
 
+extern const CommonEnum LuaPangoWrapMode[];
+extern const CommonEnum LuaPangoEllipsizeMode[];
+extern const CommonEnum LuaPangoAlignment[];
+
+
 #endif /* !_LAYOUT_H_ */

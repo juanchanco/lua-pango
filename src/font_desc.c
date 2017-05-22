@@ -7,6 +7,8 @@
 #include "common/common.h"
 #include "common/table.h"
 
+#include "font_desc.h"
+
 const CommonEnum LuaPangoStyle[] = {
     { "Normal", PANGO_STYLE_NORMAL },
     { "Oblique", PANGO_STYLE_OBLIQUE },
@@ -66,11 +68,11 @@ const CommonEnum LuaPangoFontMask[] = {
 /*PangoFontDescription * 	pango_font_description_copy_static ()*/
 /*guint 	pango_font_description_hash ()*/
 /*gboolean 	pango_font_description_equal ()*/
-static int _pango_font_description_free (lua_State* L) {
-    PangoFontDescription *desc = commonGetAs(L, 1, "FontDescription", PangoFontDescription *);
+/*static int _pango_font_description_free (lua_State* L) {
+    PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     pango_font_description_free(desc);
     return commonPush(L, "b", 1);
-}
+}*/
 /*void 	pango_font_descriptions_free ()*/
 /*void 	pango_font_description_set_family ()*/
 /*void 	pango_font_description_set_family_static ()*/
@@ -86,7 +88,7 @@ static int _pango_font_description_free (lua_State* L) {
 /*void 	_pango_font_description_set_absolute_size ()*/
 /*gint 	pango_font_description_get_size ()*/
 static int _pango_font_description_set_size (lua_State* L) {
-    PangoFontDescription *desc = commonGetAs(L, 1, "FontDescription", PangoFontDescription *);
+    PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     int size = luaL_checkinteger(L, 1);
     pango_font_description_set_size(desc, size);
     return commonPush(L, "b", 1);
@@ -102,7 +104,7 @@ static int _pango_font_description_set_size (lua_State* L) {
 static int _pango_font_description_from_string (lua_State* L) {
     const char* str = luaL_checkstring (L, 1);
     PangoFontDescription* result = pango_font_description_from_string(str);
-    return commonPush(L, "p", "FontDescription", result);
+    return commonPush(L, "p", FontDescriptionName, result);
 }
 /*char * 	pango_font_description_to_string ()*/
 /*char * 	pango_font_description_to_filename ()*/
@@ -156,3 +158,43 @@ static int _pango_font_description_from_string (lua_State* L) {
 /*void 	pango_fontset_simple_append ()*/
 /*int 	pango_fontset_simple_size ()*/
 
+static int l_font_desc_tostring(lua_State *L) {
+    PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
+	char* result = pango_font_description_to_string(desc);
+	lua_pushfstring(L, result);
+
+	return 1;
+}
+
+static int l_font_desc_gc(lua_State *L) {
+	CommonUserdata *udata = commonGetUserdata(L, 1, FontDescriptionName);
+
+	/*if (udata->mustdelete)*/
+    pango_font_description_free(udata->data);
+
+	return 0;
+}
+
+const luaL_Reg FontDescriptionMethods[] = {
+	{ "setSize", _pango_font_description_set_size },
+	{ NULL, NULL }
+};
+
+
+const luaL_Reg FontDescriptionFunctions[] = {
+	{ "fontDescriptionFromString", _pango_font_description_from_string },
+	{ NULL, NULL }
+};
+
+const luaL_Reg FontDescriptionMetamethods[] = {
+	{ "__tostring", l_font_desc_tostring},
+	{ "__gc", l_font_desc_gc },
+	/*{ "_eq", l_texture_tostring },*/
+	{ NULL, NULL }
+};
+
+const CommonObject FontDescription = {
+	"PangoFontDescription",
+	FontDescriptionMethods,
+	FontDescriptionMetamethods
+};
