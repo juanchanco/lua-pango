@@ -19,26 +19,33 @@ static const luaL_Reg functions[] = {
 static const struct {
     const luaL_Reg *functions;
 } libraries[] = {
-    /*{ CpuFunctions					},*/
-    { NULL						}
+    { LayoutFunctions },
+    { FontDescriptionFunctions },
+    { NULL }
 };
 
 static const struct {
     const char	*name;
     const CommonEnum *values;
 } enums[] = {
-	{ "wrapMode", LuaPangoWrapMode },
-	{ "ellipsizeMode", LuaPangoEllipsizeMode },
-	{ "alignment", LuaPangoAlignment },
+    { "WrapMode", LuaPangoWrapMode },
+    { "EllipsizeMode", LuaPangoEllipsizeMode },
+    { "Alignment", LuaPangoAlignment },
+    /*font_desc*/
+    { "FontStyle", LuaPangoStyle },
+    { "FontWeight", LuaPangoWeight },
+    { "FontVariant", LuaPangoVariant },
+    { "FontStretch", LuaPangoStretch },
+    { "FontMask", LuaPangoFontMask },
     { NULL, NULL }
 };
 
 static const struct {
-	const CommonObject *object;
+    const CommonObject *object;
 } objects[] = {
-	{ &Layout },
-	{ &FontDescription },
-	{ NULL }
+    { &Layout },
+    { &FontDescription },
+    { NULL }
 };
 
 
@@ -60,8 +67,8 @@ luaopen_Pango(lua_State *L)
     	commonBindEnum(L, -1, enums[i].name, enums[i].values);
 
     /* Object oriented data */
-	for (i = 0; objects[i].object != NULL; ++i)
-		commonBindObject(L, objects[i].object);
+    for (i = 0; objects[i].object != NULL; ++i)
+        commonBindObject(L, objects[i].object);
 
     /* Store the version */
     /*cairo_version ver;*/
@@ -71,8 +78,8 @@ luaopen_Pango(lua_State *L)
     /*tableSetInt(L, -1, "VERSION_MINOR", ver.minor);*/
     /*tableSetInt(L, -1, "VERSION_PATCH", ver.patch);*/
 
-    tableSetInt(L, -1, "VERSION_BINDING", 4);
-    tableSetInt(L, -1, "VERSION_BINDING_PATCH", 1);
+    /*tableSetInt(L, -1, "VERSION_BINDING", 4);*/
+    /*tableSetInt(L, -1, "VERSION_BINDING_PATCH", 1);*/
 
     /*lua_newtable(L);*/
     /*tableSetInt(L, -1, "major", ver.major);*/
@@ -80,10 +87,10 @@ luaopen_Pango(lua_State *L)
     /*tableSetInt(L, -1, "patch", ver.patch);*/
     /*lua_setfield(L, -2, "version");*/
 
-    lua_newtable(L);
-    tableSetInt(L, -1, "major", VERSION_BINDING_MAJOR);
-    tableSetInt(L, -1, "minor", VERSION_BINDING_MINOR);
-    lua_setfield(L, -2, "binding");
+    /*lua_newtable(L);*/
+    /*tableSetInt(L, -1, "major", VERSION_BINDING_MAJOR);*/
+    /*tableSetInt(L, -1, "minor", VERSION_BINDING_MINOR);*/
+    /*lua_setfield(L, -2, "binding");*/
 
     return 1;
 }

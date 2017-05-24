@@ -13,5 +13,4 @@ extern const CommonEnum LuaPangoWrapMode[];
 extern const CommonEnum LuaPangoEllipsizeMode[];
 extern const CommonEnum LuaPangoAlignment[];
 
-
 #endif /* !_LAYOUT_H_ */

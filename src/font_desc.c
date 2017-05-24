@@ -166,35 +166,34 @@ static int l_font_desc_tostring(lua_State *L) {
 	return 1;
 }
 
-static int l_font_desc_gc(lua_State *L) {
-	CommonUserdata *udata = commonGetUserdata(L, 1, FontDescriptionName);
+static int _pango_font_description_free(lua_State *L) {
+    CommonUserdata *udata = commonGetUserdata(L, 1, FontDescriptionName);
 
-	/*if (udata->mustdelete)*/
+    /*if (udata->mustdelete)*/
     pango_font_description_free(udata->data);
 
-	return 0;
+    return 0;
 }
 
 const luaL_Reg FontDescriptionMethods[] = {
-	{ "setSize", _pango_font_description_set_size },
-	{ NULL, NULL }
+    { "setSize", _pango_font_description_set_size },
+    { NULL, NULL }
 };
 
 
 const luaL_Reg FontDescriptionFunctions[] = {
-	{ "fontDescriptionFromString", _pango_font_description_from_string },
-	{ NULL, NULL }
+    { "fontDescriptionFromString", _pango_font_description_from_string },
+    { NULL, NULL }
 };
 
 const luaL_Reg FontDescriptionMetamethods[] = {
-	{ "__tostring", l_font_desc_tostring},
-	{ "__gc", l_font_desc_gc },
-	/*{ "_eq", l_texture_tostring },*/
-	{ NULL, NULL }
+    { "__tostring", l_font_desc_tostring},
+    { "__gc", _pango_font_description_free },
+    { NULL, NULL }
 };
 
 const CommonObject FontDescription = {
-	"PangoFontDescription",
-	FontDescriptionMethods,
-	FontDescriptionMetamethods
+    "FontDescription",
+    FontDescriptionMethods,
+    FontDescriptionMetamethods
 };

@@ -7,6 +7,8 @@
 #include "common/common.h"
 #include "common/table.h"
 
+/*TODO: conditonal include*/
+/*#include "pangocairo.h"*/
 #include "layout.h"
 
 const CommonEnum LuaPangoWrapMode[] = {
@@ -136,38 +138,39 @@ static int _pango_layout_get_size (lua_State* L) {
 /*void  pango_layout_line_get_x_ranges ()*/
 
 static int l_layout_gc(lua_State *L) {
-	CommonUserdata *udata = commonGetUserdata(L, 1, LayoutName);
+    CommonUserdata *udata = commonGetUserdata(L, 1, LayoutName);
 
-	/*if (udata->mustdelete)*/
-	/*TODO: count down to zero?*/
-	g_object_unref(udata->data);
+    /*if (udata->mustdelete)*/
+    /*TODO: count down to zero?*/
+    g_object_unref(udata->data);
 
-	return 0;
+    return 0;
 }
 
-/*TODO: conditonal include*/
-#include "pangocairo.c"
-
+const luaL_Reg LayoutFunctions[] = {
+    /*pangocairo.c TODO: conditonal include*/
+    /*{ "createFromCairo", _pango_cairo_create_layout },*/
+    { NULL, NULL }
+};
 const luaL_Reg LayoutMethods[] = {
-	{ "setText", _pango_layout_set_text },
-	{ "setFontDescription", _pango_layout_set_font_description },
-	{ "getSize", _pango_layout_get_size },
-	/*pangocairo.c TODO: conditonal include*/
-	{ "createFromCairo", _pango_cairo_create_layout },
-	{ "updateCairo", _pango_cairo_update_layout },
-	{ "showCairo", _pango_cairo_show_layout },
-	{ NULL, NULL }
+    { "setText", _pango_layout_set_text },
+    { "setFontDescription", _pango_layout_set_font_description },
+    { "getSize", _pango_layout_get_size },
+    /*pangocairo.c TODO: conditonal include*/
+    /*{ "updateCairo", _pango_cairo_update_layout },*/
+    /*{ "showCairo", _pango_cairo_show_layout },*/
+    { NULL, NULL }
 };
 
 const luaL_Reg LayoutMetamethods[] = {
-	/*{ "__eq", l_texture_eq },*/
-	{ "__gc", l_layout_gc },
-	/*{ "__tostring", l_texture_tostring },*/
-	{ NULL, NULL }
+    /*{ "__eq", l_texture_eq },*/
+    { "__gc", l_layout_gc },
+    /*{ "__tostring", l_texture_tostring },*/
+    { NULL, NULL }
 };
 
 const CommonObject Layout = {
-	"PangoLayout",
-	LayoutMethods,
-	LayoutMetamethods
+    "Layout",
+    LayoutMethods,
+    LayoutMetamethods
 };

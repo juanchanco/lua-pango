@@ -25,7 +25,7 @@ set(
 	src/layout.c
 	src/pango.c
     #TODO: make conditional
-	src/pangocairo.c
+	#src/pangocairo.c
 )
 
 configure_file(
@@ -38,7 +38,7 @@ include_directories(${CMAKE_SOURCE_DIR}/build)
 find_package(Pango REQUIRED)
 find_package(GLIB REQUIRED)
 #TODO: make conditional
-find_package(Cairo REQUIRED)
+find_package(Pangocairo REQUIRED)
 
 if (WITH_LUAVER MATCHES "53")
 	find_package(Lua53 REQUIRED)
