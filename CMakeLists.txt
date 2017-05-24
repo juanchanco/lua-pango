@@ -24,8 +24,6 @@ set(
 	src/font_desc.c
 	src/layout.c
 	src/pango.c
-    #TODO: make conditional
-	#src/pangocairo.c
 )
 
 configure_file(
@@ -37,8 +35,6 @@ include_directories(${CMAKE_SOURCE_DIR}/build)
 
 find_package(Pango REQUIRED)
 find_package(GLIB REQUIRED)
-#TODO: make conditional
-find_package(Pangocairo REQUIRED)
 
 if (WITH_LUAVER MATCHES "53")
 	find_package(Lua53 REQUIRED)
@@ -73,8 +69,6 @@ endif ()
 include_directories(
 	${GLIB_INCLUDE_DIRS}
 	${PANGO_INCLUDE_DIRS}
-#TODO: make conditional
-	${CAIRO_INCLUDE_DIRS}
 	${CMAKE_SOURCE_DIR}
 	${LUA_INCLUDES}
 )
@@ -105,10 +99,8 @@ set_target_properties(
 target_link_libraries(
 	Pango
 	common
-#TODO: make conditional
-	${CAIRO_LIBRARIES}
-	${GLIB_LIBRARIES}
 	${PANGO_LIBRARIES}
+	${GLIB_LIBRARIES}
 	${LUA_LIBRARIES}
 )
 
