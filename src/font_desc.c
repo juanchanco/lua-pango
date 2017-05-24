@@ -86,10 +86,16 @@ const CommonEnum LuaPangoFontMask[] = {
 /*void 	pango_font_description_set_stretch ()*/
 /*PangoStretch 	pango_font_description_get_stretch ()*/
 /*void 	_pango_font_description_set_absolute_size ()*/
+static int _pango_font_description_set_absolute_size (lua_State* L) {
+    PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
+    double size =  (double) luaL_checknumber(L, 2);
+    pango_font_description_set_absolute_size(desc, size);
+    return commonPush(L, "b", 1);
+}
 /*gint 	pango_font_description_get_size ()*/
 static int _pango_font_description_set_size (lua_State* L) {
     PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
-    int size = luaL_checkinteger(L, 1);
+    int size = luaL_checkinteger(L, 2);
     pango_font_description_set_size(desc, size);
     return commonPush(L, "b", 1);
 }
@@ -176,6 +182,7 @@ static int _pango_font_description_free(lua_State *L) {
 }
 
 const luaL_Reg FontDescriptionMethods[] = {
+    { "setAbsoluteSize", _pango_font_description_set_absolute_size },
     { "setSize", _pango_font_description_set_size },
     { NULL, NULL }
 };
