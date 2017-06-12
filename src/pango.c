@@ -7,6 +7,7 @@
 #include "common/common.h"
 #include "common/table.h"
 
+#include "context.h"
 #include "layout.h"
 #include "font_desc.h"
 
@@ -20,6 +21,7 @@ static const struct {
     const luaL_Reg *functions;
 } libraries[] = {
     { LayoutFunctions },
+    { ContextFunctions },
     { FontDescriptionFunctions },
     { NULL }
 };
@@ -43,6 +45,7 @@ static const struct {
 static const struct {
     const CommonObject *object;
 } objects[] = {
+    { &Context },
     { &Layout },
     { &FontDescription },
     { NULL }

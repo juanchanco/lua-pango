@@ -23,6 +23,7 @@ set(
 	SOURCES
 	src/font_desc.c
 	src/layout.c
+	src/context.c
 	src/pango.c
 )
 
