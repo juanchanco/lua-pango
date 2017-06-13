@@ -10,6 +10,12 @@
 #include "context.h"
 #include "layout.h"
 #include "font_desc.h"
+#include "font_map.h"
+#include "font_family.h"
+#include "font_face.h"
+#include "font_metrics.h"
+#include "font_set.h"
+#include "font.h"
 
 
 static const luaL_Reg functions[] = {
@@ -23,6 +29,12 @@ static const struct {
     { LayoutFunctions },
     { ContextFunctions },
     { FontDescriptionFunctions },
+    { FontMapFunctions },
+    { FontFamilyFunctions },
+    { FontFaceFunctions },
+    { FontMetricsFunctions },
+    { FontSetFunctions },
+    { FontFunctions },
     { NULL }
 };
 
@@ -47,7 +59,14 @@ static const struct {
 } objects[] = {
     { &Context },
     { &Layout },
+    { &Font},
     { &FontDescription },
+    { &FontMap },
+    { &FontFamily },
+    { &FontFace },
+    { &FontMetrics },
+    { &FontSet },
+    { &Font },
     { NULL }
 };
 

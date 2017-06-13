@@ -7,8 +7,7 @@
 #include "common/common.h"
 #include "common/table.h"
 
-/*TODO: conditonal include*/
-/*#include "pangocairo.h"*/
+#include "font_desc.h"
 #include "layout.h"
 
 const CommonEnum LuaPangoWrapMode[] = {
@@ -55,7 +54,7 @@ static int _pango_layout_set_text (lua_State* L) {
 static int _pango_layout_set_font_description (lua_State* L) {
     PangoLayout *layout = commonGetAs(L, 1, LayoutName, PangoLayout *);
     PangoFontDescription *desc =
-        commonGetAs(L, 2, "FontDescription", PangoFontDescription *);
+        commonGetAs(L, 2, FontDescriptionName, PangoFontDescription *);
     pango_layout_set_font_description(layout, desc);
     return commonPush(L, "b", 1);
 }
@@ -152,7 +151,8 @@ const luaL_Reg LayoutFunctions[] = {
     /*{ "createFromCairo", _pango_cairo_create_layout },*/
     { NULL, NULL }
 };
-const luaL_Reg LayoutMethods[] = {
+
+static const luaL_Reg methods[] = {
     { "setText", _pango_layout_set_text },
     { "setFontDescription", _pango_layout_set_font_description },
     { "getSize", _pango_layout_get_size },
@@ -162,7 +162,7 @@ const luaL_Reg LayoutMethods[] = {
     { NULL, NULL }
 };
 
-const luaL_Reg LayoutMetamethods[] = {
+static const luaL_Reg metamethods[] = {
     /*{ "__eq", l_texture_eq },*/
     { "__gc", l_layout_gc },
     /*{ "__tostring", l_texture_tostring },*/
@@ -171,6 +171,6 @@ const luaL_Reg LayoutMetamethods[] = {
 
 const CommonObject Layout = {
     "Pango.Layout",
-    LayoutMethods,
-    LayoutMetamethods
+    methods,
+    metamethods
 };

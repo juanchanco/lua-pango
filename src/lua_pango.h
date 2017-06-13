@@ -5,8 +5,9 @@
 #ifndef _LUA_PANGO_H_
 #define _LUA_PANGO_H_
 
-#define LayoutName "Pango.Layout"
-#define ContextName "Pango.Context"
-#define FontDescriptionName "Pango.FontDescription"
+#define PangoLayoutName "Pango.Layout"
+#define PangoContextName "Pango.Context"
+#define PangoFontDescriptionName "Pango.FontDescription"
+#define PangoFontMapName "Pango.FontMap"
 #endif /* !_LUA_PANGO_H_ */
 

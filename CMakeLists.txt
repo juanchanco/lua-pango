@@ -22,6 +22,12 @@ set(WITH_LUAVER "53"
 set(
 	SOURCES
 	src/font_desc.c
+	src/font_map.c
+	src/font_family.c
+	src/font_face.c
+	src/font_metrics.c
+	src/font_set.c
+	src/font.c
 	src/layout.c
 	src/context.c
 	src/pango.c
