@@ -13,4 +13,6 @@
  */
 //int commonPushCairoError(lua_State *L, cairo_status_t status);
 
+void
+pushRect(lua_State *L, const PangoRectangle *rect);
 #endif /* !_PANGO_COMMON_H_ */
