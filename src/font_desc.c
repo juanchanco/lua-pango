@@ -68,12 +68,6 @@ const CommonEnum LuaPangoFontMask[] = {
 /*PangoFontDescription * 	pango_font_description_copy_static ()*/
 /*guint 	pango_font_description_hash ()*/
 /*gboolean 	pango_font_description_equal ()*/
-/*static int _pango_font_description_free (lua_State* L) {
-    PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
-    pango_font_description_free(desc);
-    return commonPush(L, "b", 1);
-}*/
-/*void 	pango_font_descriptions_free ()*/
 /*void 	pango_font_description_set_family ()*/
 /*void 	pango_font_description_set_family_static ()*/
 /*const char * 	pango_font_description_get_family ()*/
