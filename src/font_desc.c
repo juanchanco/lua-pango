@@ -200,7 +200,7 @@ const luaL_Reg FontDescriptionMetamethods[] = {
 };
 
 const CommonObject FontDescription = {
-    "FontDescription",
+    "Pango.FontDescription",
     FontDescriptionMethods,
     FontDescriptionMetamethods
 };

@@ -73,7 +73,7 @@ static const luaL_Reg metamethods[] = {
 };
 
 const CommonObject Context = {
-    "Context",
+    "Pango.Context",
     methods,
     metamethods
 };

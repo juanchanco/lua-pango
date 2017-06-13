@@ -170,7 +170,7 @@ const luaL_Reg LayoutMetamethods[] = {
 };
 
 const CommonObject Layout = {
-    "Layout",
+    "Pango.Layout",
     LayoutMethods,
     LayoutMetamethods
 };
