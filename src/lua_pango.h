@@ -9,5 +9,7 @@
 #define PangoContextName "Pango.Context"
 #define PangoFontDescriptionName "Pango.FontDescription"
 #define PangoFontMapName "Pango.FontMap"
+#define PangoFontName "Pango.Font"
+#define PangoGlyphStringName "Pango.GlyphString"
 #endif /* !_LUA_PANGO_H_ */
 
