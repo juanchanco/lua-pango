@@ -27,10 +27,12 @@ int push_new_font_family_array(lua_State *L, PangoFontFamily **families, int len
 
 static int font_family_array_get(lua_State *L) {
     font_family_array *array = commonGetAs(L, 1, FontFamilyArrayName, font_family_array *);
-    int i = luaL_checkinteger (L, 2);
-    luaL_argcheck(L, 0 <= i && i < array->length, 2, "index out of bounds");
-
-    return commonPush(L, "p", FontFamilyName, (array->families)[i]);
+    int i = luaL_checkinteger (L, 2) - 1;
+    if (0 <= i && i < array->length) {
+        return commonPush(L, "p", FontFamilyName, (array->families)[i]);
+    } else {
+        return commonPush(L, "n");
+    }
 }
 static int font_family_array_len(lua_State *L) {
     font_family_array *array = commonGetAs(L, 1, FontFamilyArrayName, font_family_array *);
