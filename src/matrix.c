@@ -9,7 +9,6 @@
 
 #include "matrix.h"
 
-/*double 	pango_units_to_double ()*/
 static int _pango_units_to_double (lua_State* L) {
     int i = luaL_checkinteger(L, 1);
     double d = pango_units_to_double(i);
@@ -22,14 +21,21 @@ static int _pango_units_from_double (lua_State* L) {
     lua_pushinteger(L, i);
     return 1;
 }
-/*int 	pango_units_from_double ()*/
-/*#define 	PANGO_ASCENT()*/
-/*#define 	PANGO_DESCENT()*/
-/*#define 	PANGO_LBEARING()*/
-/*#define 	PANGO_RBEARING()*/
 /*void 	pango_extents_to_pixels ()*/
-/*PangoMatrix * 	pango_matrix_copy ()*/
-/*void 	pango_matrix_free ()*/
+static int _pango_matrix_copy(lua_State *L) {
+    PangoMatrix* matrix = commonGetAs(L, 1, MatrixName, PangoMatrix *);
+    PangoMatrix* copy = pango_matrix_copy(matrix);
+
+    return commonPush(L, "p", MatrixName, copy);
+}
+static int _pango_matrix_free(lua_State *L) {
+    PangoMatrix* matrix = commonGetAs(L, 1, MatrixName, PangoMatrix *);
+    pango_matrix_free(matrix);
+
+    return 0;
+}
+
+/*TODO: many of these can take a NULL matrix. is that really usefull?*/
 /*void 	pango_matrix_translate ()*/
 /*void 	pango_matrix_scale ()*/
 /*void 	pango_matrix_rotate ()*/
@@ -47,3 +53,18 @@ const luaL_Reg MatrixFunctions[] = {
     { NULL, NULL }
 };
 
+static const luaL_Reg methods[] = {
+    { "copy", _pango_matrix_copy },
+    { NULL, NULL }
+};
+
+static const luaL_Reg metamethods[] = {
+    { "__gc", _pango_matrix_free },
+    { NULL, NULL }
+};
+
+const CommonObject Matrix = {
+    "Pango.Matrix",
+    methods,
+    metamethods
+};

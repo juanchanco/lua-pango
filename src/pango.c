@@ -8,18 +8,20 @@
 #include "common/table.h"
 
 #include "context.h"
-#include "layout.h"
+#include "font.h"
 #include "font_desc.h"
-#include "font_map.h"
-#include "font_family.h"
-#include "font_family_array.h"
 #include "font_face.h"
 #include "font_face_array.h"
+#include "font_family.h"
+#include "font_family_array.h"
+#include "font_map.h"
 #include "font_metrics.h"
 #include "font_set.h"
-#include "font.h"
+#include "glyph_item.h"
+#include "glyph_string.h"
+#include "item.h"
+#include "layout.h"
 #include "matrix.h"
-
 
 static const luaL_Reg functions[] = {
     { NULL, NULL }
@@ -29,9 +31,11 @@ static const luaL_Reg functions[] = {
 static const struct {
     const luaL_Reg *functions;
 } libraries[] = {
-    { LayoutFunctions },
     { ContextFunctions },
     { FontDescriptionFunctions },
+    { GlyphStringFunctions },
+    { ItemFunctions },
+    { LayoutFunctions },
     { MatrixFunctions },
     { NULL }
 };
@@ -67,6 +71,9 @@ static const struct {
     { &FontMetrics },
     { &FontSet },
     { &Font },
+    { &GlyphItem },
+    { &GlyphString },
+    { &Item },
     { NULL }
 };
 

@@ -3,10 +3,10 @@
 
 #include <common/common.h>
 
-//#define MatrixName	Matrix.name
+#define MatrixName	Matrix.name
 
 extern const luaL_Reg MatrixFunctions[];
 
-//extern const CommonObject Matrix;
+extern const CommonObject Matrix;
 
 #endif /* _MATRIX_H_ */
