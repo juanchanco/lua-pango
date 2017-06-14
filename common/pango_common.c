@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <pango/pango.h>
 #include "table.h"
 #include "pango_common.h"
@@ -15,4 +16,13 @@ pushRect(lua_State *L, const PangoRectangle *rect)
     tableSetInt(L, -1, "y", rect->y);
     tableSetInt(L, -1, "width", rect->width);
     tableSetInt(L, -1, "height", rect->height);
+}
+
+void
+loadRect(lua_State *L, PangoRectangle *rect) {
+	luaL_checktype(L, 1, LUA_TTABLE);
+    rect->x = tableGetInt(L, 1, "x");
+    rect->y = tableGetInt(L, 1, "y");
+    rect->width = tableGetInt(L, 1, "width");
+    rect->height = tableGetInt(L, 1, "height");
 }

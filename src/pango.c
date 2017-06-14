@@ -18,6 +18,7 @@
 #include "font_metrics.h"
 #include "font_set.h"
 #include "font.h"
+#include "matrix.h"
 
 
 static const luaL_Reg functions[] = {
@@ -31,6 +32,7 @@ static const struct {
     { LayoutFunctions },
     { ContextFunctions },
     { FontDescriptionFunctions },
+    { MatrixFunctions },
     { NULL }
 };
 

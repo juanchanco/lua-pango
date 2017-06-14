@@ -32,6 +32,7 @@ set(
 	src/font.c
 	src/layout.c
 	src/context.c
+	src/matrix.c
 	src/pango.c
 )
 

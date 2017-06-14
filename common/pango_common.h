@@ -4,15 +4,9 @@
 #ifndef _PANGO_COMMON_H_
 #define _PANGO_COMMON_H_
 
-/**
- * Pushes count * nil + the SDL_GetError() message.
- *
- * @param L the Lua state
- * @param count number of nil to pushes before
- * @return count
- */
-//int commonPushCairoError(lua_State *L, cairo_status_t status);
-
 void
 pushRect(lua_State *L, const PangoRectangle *rect);
+
+void
+loadRect(lua_State *L, PangoRectangle *rect);
 #endif /* !_PANGO_COMMON_H_ */
