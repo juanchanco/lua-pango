@@ -26,6 +26,7 @@ set(
 	src/font_family.c
 	src/font_family_array.c
 	src/font_face.c
+	src/font_face_array.c
 	src/font_metrics.c
 	src/font_set.c
 	src/font.c

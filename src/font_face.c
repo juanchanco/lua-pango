@@ -27,9 +27,8 @@ static int _pango_font_face_list_sizes (lua_State* L) {
         lua_createtable(L, n, 0);
         int i;
         for (i = 0; i < n; i++) {
-            lua_pushinteger(L, i+1);
             lua_pushinteger(L, sizes[i]);
-            lua_settable(L, -1);
+            lua_seti(L, 2, i);
         }
     } else {
         lua_pushnil(L);
