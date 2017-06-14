@@ -12,6 +12,7 @@
 #include "font_desc.h"
 #include "font_map.h"
 #include "font_family.h"
+#include "font_family_array.h"
 #include "font_face.h"
 #include "font_metrics.h"
 #include "font_set.h"
@@ -63,6 +64,7 @@ static const struct {
     { &FontDescription },
     { &FontMap },
     { &FontFamily },
+    { &FontFamilyArray },
     { &FontFace },
     { &FontMetrics },
     { &FontSet },

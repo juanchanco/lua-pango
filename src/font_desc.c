@@ -79,19 +79,18 @@ const CommonEnum LuaPangoFontMask[] = {
 /*PangoWeight 	pango_font_description_get_weight ()*/
 /*void 	pango_font_description_set_stretch ()*/
 /*PangoStretch 	pango_font_description_get_stretch ()*/
-/*void 	_pango_font_description_set_absolute_size ()*/
 static int _pango_font_description_set_absolute_size (lua_State* L) {
     PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     double size =  (double) luaL_checknumber(L, 2);
     pango_font_description_set_absolute_size(desc, size);
-    return commonPush(L, "b", 1);
+    return 0;
 }
 /*gint 	pango_font_description_get_size ()*/
 static int _pango_font_description_set_size (lua_State* L) {
     PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     int size = luaL_checkinteger(L, 2);
     pango_font_description_set_size(desc, size);
-    return commonPush(L, "b", 1);
+    return 0;
 }
 /*gboolean 	pango_font_description_get_size_is_absolute ()*/
 /*void 	pango_font_description_set_gravity ()*/
@@ -111,7 +110,7 @@ static int _pango_font_description_from_string (lua_State* L) {
 static int l_font_desc_tostring(lua_State *L) {
     PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
 	char* result = pango_font_description_to_string(desc);
-	lua_pushfstring(L, result);
+	lua_pushfstring(L, "FontDescription: %s", result);
 
 	return 1;
 }
@@ -137,6 +136,7 @@ static const luaL_Reg methods[] = {
 };
 
 static const luaL_Reg metamethods[] = {
+    //TODO: separate version to get raw string
     { "__tostring", l_font_desc_tostring},
     { "__gc", _pango_font_description_free },
     { NULL, NULL }
