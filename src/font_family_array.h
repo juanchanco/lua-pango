@@ -3,7 +3,7 @@
 
 #include <common/common.h>
 
-int push_new_font_family_array(lua_State *L, PangoFontFamily ***families, int length);
+int push_new_font_family_array(lua_State *L, PangoFontFamily **families, int length);
 #define FontFamilyArrayName	FontFamilyArray.name
 
 extern const CommonObject FontFamilyArray;

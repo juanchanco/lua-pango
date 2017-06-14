@@ -24,10 +24,10 @@ static int _pango_font_map_create_context (lua_State* L) {
 /*void 	pango_font_map_list_families ()*/
 static int _pango_font_map_list_families (lua_State* L) {
     PangoFontMap *map = commonGetAs(L, 1, FontMapName, PangoFontMap *);
-    PangoFontFamily ***families = 0;
+    PangoFontFamily **families = 0;
     int length;
 
-    pango_font_map_list_families(map, families, &length);
+    pango_font_map_list_families(map, &families, &length);
     return push_new_font_family_array(L, families, length);
 }
 /*const char * 	pango_font_map_get_shape_engine_type ()*/
