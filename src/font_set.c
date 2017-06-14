@@ -18,9 +18,6 @@
 /*void 	pango_fontset_simple_append ()*/
 /*int 	pango_fontset_simple_size ()*/
 
-const luaL_Reg FontSetFunctions[] = {
-    { NULL, NULL }
-};
 
 static const luaL_Reg methods[] = {
     { NULL, NULL }

@@ -5,8 +5,6 @@
 
 #define FontFamilyName	FontFamily.name
 
-extern const luaL_Reg FontFamilyFunctions[];
-
 extern const CommonObject FontFamily;
 #endif /* !_FONT_FAMILY_H_ */
 

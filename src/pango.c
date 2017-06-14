@@ -30,12 +30,6 @@ static const struct {
     { LayoutFunctions },
     { ContextFunctions },
     { FontDescriptionFunctions },
-    { FontMapFunctions },
-    { FontFamilyFunctions },
-    { FontFaceFunctions },
-    { FontMetricsFunctions },
-    { FontSetFunctions },
-    { FontFunctions },
     { NULL }
 };
 

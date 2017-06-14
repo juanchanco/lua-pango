@@ -5,8 +5,6 @@
 
 #define FontSetName	FontSet.name
 
-extern const luaL_Reg FontSetFunctions[];
-
 extern const CommonObject FontSet;
 #endif /* !_FONT_SET_H_ */
 

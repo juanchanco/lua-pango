@@ -5,8 +5,6 @@
 
 #define FontFaceName	FontFace.name
 
-extern const luaL_Reg FontFaceFunctions[];
-
 extern const CommonObject FontFace;
 #endif /* !_FONT_FACE_H_ */
 

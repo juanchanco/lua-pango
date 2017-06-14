@@ -107,15 +107,23 @@ static int _pango_font_description_from_string (lua_State* L) {
 }
 /*char * 	pango_font_description_to_filename ()*/
 
-static int l_font_desc_tostring(lua_State *L) {
+static int _pango_font_desc_tostring(lua_State *L) {
     PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
 	char* result = pango_font_description_to_string(desc);
-	lua_pushfstring(L, "FontDescription: %s", result);
+	lua_pushstring(L, result);
 
 	return 1;
 }
 
-static int _pango_font_description_free(lua_State *L) {
+static int _tostring(lua_State *L) {
+    PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
+	char* result = pango_font_description_to_string(desc);
+	lua_pushfstring(L, "%s: %s", FontDescriptionName, result);
+
+	return 1;
+}
+
+static int _free(lua_State *L) {
     CommonUserdata *udata = commonGetUserdata(L, 1, FontDescriptionName);
 
     /*if (udata->mustdelete)*/
@@ -132,13 +140,13 @@ const luaL_Reg FontDescriptionFunctions[] = {
 static const luaL_Reg methods[] = {
     { "setAbsoluteSize", _pango_font_description_set_absolute_size },
     { "setSize", _pango_font_description_set_size },
+    { "toString", _pango_font_desc_tostring },
     { NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
-    //TODO: separate version to get raw string
-    { "__tostring", l_font_desc_tostring},
-    { "__gc", _pango_font_description_free },
+    { "__tostring", _tostring},
+    { "__gc", _free },
     { NULL, NULL }
 };
 

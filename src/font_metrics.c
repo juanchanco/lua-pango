@@ -22,9 +22,6 @@
 /*int 	pango_font_metrics_get_strikethrough_thickness ()*/
 /*int 	pango_font_metrics_get_strikethrough_position ()*/
 
-const luaL_Reg FontMetricsFunctions[] = {
-    { NULL, NULL }
-};
 
 static const luaL_Reg methods[] = {
     { NULL, NULL }

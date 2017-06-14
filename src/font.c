@@ -18,9 +18,6 @@
 /*PangoFontMetrics * 	pango_font_get_metrics ()*/
 /*PangoFontMap * 	pango_font_get_font_map ()*/
 
-const luaL_Reg FontFunctions[] = {
-    { NULL, NULL }
-};
 
 static const luaL_Reg methods[] = {
     { NULL, NULL }

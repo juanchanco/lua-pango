@@ -5,8 +5,6 @@
 
 #define FontMapName	FontMap.name
 
-extern const luaL_Reg FontMapFunctions[];
-
 extern const CommonObject FontMap;
 #endif /* !_FONT_MAP_H_ */
 

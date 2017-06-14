@@ -5,8 +5,6 @@
 
 #define FontMetricsName	FontMetrics.name
 
-extern const luaL_Reg FontMetricsFunctions[];
-
 extern const CommonObject FontMetrics;
 #endif /* !_FONT_METRICS_H_ */
 
