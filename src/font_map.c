@@ -36,11 +36,11 @@ static int _pango_font_map_list_families (lua_State* L) {
 
 
 const luaL_Reg FontMapFunctions[] = {
-    { "listFamilies", _pango_font_map_list_families },
     { NULL, NULL }
 };
 
 static const luaL_Reg methods[] = {
+    { "listFamilies", _pango_font_map_list_families },
     { "createContext", _pango_font_map_create_context },
     { NULL, NULL }
 };
