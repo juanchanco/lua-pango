@@ -63,64 +63,64 @@ const CommonEnum LuaPangoFontMask[] = {
 };
 
 
-/*PangoFontDescription * 	pango_font_description_new ()*/
-/*PangoFontDescription * 	pango_font_description_copy ()*/
-/*PangoFontDescription * 	pango_font_description_copy_static ()*/
-/*guint 	pango_font_description_hash ()*/
-/*gboolean 	pango_font_description_equal ()*/
-/*void 	pango_font_description_set_family ()*/
-/*void 	pango_font_description_set_family_static ()*/
-/*const char * 	pango_font_description_get_family ()*/
-/*void 	pango_font_description_set_style ()*/
-/*PangoStyle 	pango_font_description_get_style ()*/
-/*void 	pango_font_description_set_variant ()*/
-/*PangoVariant 	pango_font_description_get_variant ()*/
-/*void 	pango_font_description_set_weight ()*/
-/*PangoWeight 	pango_font_description_get_weight ()*/
-/*void 	pango_font_description_set_stretch ()*/
-/*PangoStretch 	pango_font_description_get_stretch ()*/
+/*PangoFontDescription *     pango_font_description_new ()*/
+/*PangoFontDescription *     pango_font_description_copy ()*/
+/*PangoFontDescription *     pango_font_description_copy_static ()*/
+/*guint     pango_font_description_hash ()*/
+/*gboolean     pango_font_description_equal ()*/
+/*void     pango_font_description_set_family ()*/
+/*void     pango_font_description_set_family_static ()*/
+/*const char *     pango_font_description_get_family ()*/
+/*void     pango_font_description_set_style ()*/
+/*PangoStyle     pango_font_description_get_style ()*/
+/*void     pango_font_description_set_variant ()*/
+/*PangoVariant     pango_font_description_get_variant ()*/
+/*void     pango_font_description_set_weight ()*/
+/*PangoWeight     pango_font_description_get_weight ()*/
+/*void     pango_font_description_set_stretch ()*/
+/*PangoStretch     pango_font_description_get_stretch ()*/
 static int _pango_font_description_set_absolute_size (lua_State* L) {
     PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     double size =  (double) luaL_checknumber(L, 2);
     pango_font_description_set_absolute_size(desc, size);
     return 0;
 }
-/*gint 	pango_font_description_get_size ()*/
+/*gint     pango_font_description_get_size ()*/
 static int _pango_font_description_set_size (lua_State* L) {
     PangoFontDescription *desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
     int size = luaL_checkinteger(L, 2);
     pango_font_description_set_size(desc, size);
     return 0;
 }
-/*gboolean 	pango_font_description_get_size_is_absolute ()*/
-/*void 	pango_font_description_set_gravity ()*/
-/*PangoGravity 	pango_font_description_get_gravity ()*/
-/*PangoFontMask 	pango_font_description_get_set_fields ()*/
-/*void 	pango_font_description_unset_fields ()*/
-/*void 	pango_font_description_merge ()*/
-/*void 	pango_font_description_merge_static ()*/
-/*gboolean 	pango_font_description_better_match ()*/
+/*gboolean     pango_font_description_get_size_is_absolute ()*/
+/*void     pango_font_description_set_gravity ()*/
+/*PangoGravity     pango_font_description_get_gravity ()*/
+/*PangoFontMask     pango_font_description_get_set_fields ()*/
+/*void     pango_font_description_unset_fields ()*/
+/*void     pango_font_description_merge ()*/
+/*void     pango_font_description_merge_static ()*/
+/*gboolean     pango_font_description_better_match ()*/
 static int _pango_font_description_from_string (lua_State* L) {
     const char* str = luaL_checkstring (L, 1);
     PangoFontDescription* result = pango_font_description_from_string(str);
     return commonPush(L, "p", FontDescriptionName, result);
 }
-/*char * 	pango_font_description_to_filename ()*/
+/*char *     pango_font_description_to_filename ()*/
 
 static int _pango_font_desc_tostring(lua_State *L) {
     PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
-	char* result = pango_font_description_to_string(desc);
-	lua_pushstring(L, result);
+    char* result = pango_font_description_to_string(desc);
+    lua_pushstring(L, result);
 
-	return 1;
+    return 1;
 }
 
 static int _tostring(lua_State *L) {
     PangoFontDescription* desc = commonGetAs(L, 1, FontDescriptionName, PangoFontDescription *);
-	char* result = pango_font_description_to_string(desc);
-	lua_pushfstring(L, "%s: %s", FontDescriptionName, result);
+    char* result = pango_font_description_to_string(desc);
+    lua_pushfstring(L, "%s: %s", FontDescriptionName, result);
 
-	return 1;
+    return 1;
 }
 
 static int _free(lua_State *L) {

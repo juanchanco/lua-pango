@@ -7,4 +7,3 @@
 
 extern const CommonObject FontMetrics;
 #endif /* !_FONT_METRICS_H_ */
-

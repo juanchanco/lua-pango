@@ -13,11 +13,11 @@
 
 static int _pango_font_face_get_face_name(lua_State *L) {
     PangoFontFace* face = commonGetAs(L, 1, FontFaceName, PangoFontFace *);
-	const char* result = pango_font_face_get_face_name(face);
-	lua_pushstring(L, result);
-	return 1;
+    const char* result = pango_font_face_get_face_name(face);
+    lua_pushstring(L, result);
+    return 1;
 }
-/*void 	pango_font_face_list_sizes ()*/
+/*void     pango_font_face_list_sizes ()*/
 static int _pango_font_face_list_sizes (lua_State* L) {
     PangoFontFace* face = commonGetAs(L, 1, FontFaceName, PangoFontFace *);
     int *sizes;
@@ -48,10 +48,10 @@ static int _pango_font_face_is_synthesized (lua_State* L) {
 
 static int _tostring(lua_State *L) {
     PangoFontFace* face = commonGetAs(L, 1, FontFaceName, PangoFontFace *);
-	const char* result = pango_font_face_get_face_name(face);
-	lua_pushfstring(L, "%s: %s", FontFaceName, result);
+    const char* result = pango_font_face_get_face_name(face);
+    lua_pushfstring(L, "%s: %s", FontFaceName, result);
 
-	return 1;
+    return 1;
 }
 
 static const luaL_Reg methods[] = {

@@ -41,7 +41,7 @@ static const struct {
 };
 
 static const struct {
-    const char	*name;
+    const char    *name;
     const CommonEnum *values;
 } enums[] = {
     { "WrapMode", LuaPangoWrapMode },
@@ -89,11 +89,11 @@ luaopen_Pango(lua_State *L)
 
     /* Library categories */
     for (i = 0; libraries[i].functions != NULL; ++i)
-    	commonBindLibrary(L, libraries[i].functions);
+        commonBindLibrary(L, libraries[i].functions);
 
     /* Enumerations */
     for (i = 0; enums[i].values != NULL; ++i)
-    	commonBindEnum(L, -1, enums[i].name, enums[i].values);
+        commonBindEnum(L, -1, enums[i].name, enums[i].values);
 
     /* Object oriented data */
     for (i = 0; objects[i].object != NULL; ++i)
