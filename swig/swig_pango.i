@@ -11,6 +11,7 @@
 /*%apply SWIGTYPE** OUTPUT { pango_text_extents_t **extents };*/
 /*%include <carrays.i>*/
 /*%array_functions(pango_glyph_t, glyphs)*/
+%import <pango/pango-version-macros.h>
 %include <pango/pango-attributes.h>
 %include <pango/pango-bidi-type.h>
 %include <pango/pango-break.h>
@@ -32,7 +33,8 @@
 %include <pango/pango-script.h>
 %include <pango/pango-tabs.h>
 %include <pango/pango-types.h>
-%include <pango/pango-utils.h>
+/*TODO: different PANGO_DEPRECATED?*/
+/*%include <pango/pango-utils.h>*/
 %native(setmetatable) int userdata_set_metatable(lua_State *L);
 %{
 int userdata_set_metatable(lua_State *L)
