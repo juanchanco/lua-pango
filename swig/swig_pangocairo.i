@@ -13,4 +13,6 @@
 /*%array_functions(pango_glyph_t, glyphs)*/
 /*%import <glib.h>*/
 /*%import <gobject/gobject.h>*/
+%import <pango/pango-layout.h>
+%import <cairo.h>
 %include <pango/pangocairo.h>

@@ -2,6 +2,8 @@
 %{
  #include <pango/pango.h>
 %}
+%include <typemaps.i>
+%apply int *OUTPUT { int *width, int *height };
 #define G_BEGIN_DECLS
 #define G_END_DECLS
 #define G_GNUC_CONST

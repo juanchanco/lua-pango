@@ -26,7 +26,8 @@ local layout_mt = {
   end,
   __index = {
     setText = function(self, text)
-      pango.pango_layout_set_text(self, text)
+      --print(string.format("text => %s", text))
+      pango.pango_layout_set_text(self, text, #text)
     end,
     setFontDescription = function(self, desc)
       pango.pango_layout_set_font_description(self, desc)
@@ -38,8 +39,7 @@ local layout_mt = {
 }
 
 local function addMetatable(layout)
-  pango.setmetatable(layout, font_desc_mt)
-  return desc
+  pango.setmetatable(layout, layout_mt)
 end
 
 
