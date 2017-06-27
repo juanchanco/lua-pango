@@ -11,3 +11,5 @@ build
 .vimrc
 *.swp
 *.so
+*.o
+swig/**/*.c
